@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sleep(0.5);
+    NSLog(@"xingtan sb");
     // Override point for customization after application launch.
     return YES;
 }

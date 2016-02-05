@@ -88,9 +88,24 @@ static bool repeatPasswordIsGood=false;
     if (!repeatPasswordIsGood)  problemStr=[problemStr stringByAppendingString:@" Two passwords are different!"];
     
     if (emailIsGood && mobileIsGood && passwordIsGood && repeatPasswordIsGood) {
-        NSString * urlString = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?username=%@&password=%@&mobile=%@",emailStr,passwordStr,mobileStr];
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:urlString preferredStyle:UIAlertControllerStyleAlert];
+
+        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        NSURL *url = [NSURL URLWithString:@"http://rjtmobile.com/ansari/regtest.php?"];
+        NSMutableURLRequest *urlrequest = [NSMutableURLRequest requestWithURL:url];
+        NSString *urlStr = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?%@&%@&%@",emailStr,passwordStr,mobileStr];
+        [urlrequest setHTTPMethod:@"POST"];
+        [urlrequest setHTTPBody:[urlStr dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlrequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            NSLog(@"response state code%ld",(long)[httpResponse statusCode]);
+
+        }];
+        [dataTask resume];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:urlStr preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];

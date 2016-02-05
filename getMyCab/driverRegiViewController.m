@@ -97,6 +97,37 @@ static bool photoIsGood=false;
     if (indexPath.row==3 || indexPath.row==4) {
         cell.showTextField.secureTextEntry=true;
     }
+    
+    if (indexPath.row==8) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"" forState:UIControlStateNormal];
+        button.backgroundColor= [UIColor blackColor];
+        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
+        [button addTarget:self action:@selector(showDateView) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:button];
+    }else if (indexPath.row==9) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"" forState:UIControlStateNormal];
+        button.backgroundColor= [UIColor blackColor];
+        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
+        [button addTarget:self action:@selector(alertControllerForEducationQulification) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:button];
+    }else if (indexPath.row==10) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"" forState:UIControlStateNormal];
+        button.backgroundColor= [UIColor blackColor];
+        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
+        [button addTarget:self action:@selector(alertControllerForBloodGroupSelection) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:button];
+    }else if (indexPath.row==11) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setTitle:@"" forState:UIControlStateNormal];
+        button.backgroundColor= [UIColor redColor];
+        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
+        [button addTarget:self action:@selector(startGettingLocation) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:button];
+    }
+    
     return cell;
 }
 
@@ -106,67 +137,71 @@ static bool photoIsGood=false;
 
 #pragma mark- textfield delegate-
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField.tag==9) {
-        _dataPickerView.hidden=false;
-        [textField resignFirstResponder];
-        UITableViewCell *cell = (UITableViewCell *) [textField superview];
-        [_tableview scrollToRowAtIndexPath:[_tableview indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+    UITableViewCell *cellAll = (UITableViewCell *) [[textField superview] superview];
+    [_tableview scrollToRowAtIndexPath:[_tableview indexPathForCell:cellAll] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         
-    }else if (textField.tag==10) {
-        UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Select Education Level" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
-        UIAlertAction * edu1=[UIAlertAction actionWithTitle:@"High School" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"High School";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"10"]];
-        }];
-        UIAlertAction * edu2=[UIAlertAction actionWithTitle:@"Bechalor" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"Bechalor";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"10"]];
-        }];
-        UIAlertAction * edu3=[UIAlertAction actionWithTitle:@"Master" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"Master";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"10"]];
-        }];
-        UIAlertAction * edu4=[UIAlertAction actionWithTitle:@"Doctor" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"Doctor";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"10"]];
-        }];
-        [alert addAction:edu1];
-        [alert addAction:edu2];
-        [alert addAction:edu3];
-        [alert addAction:edu4];
-        [self presentViewController:alert animated:YES completion:nil];
-        [textField resignFirstResponder];
-    }else if (textField.tag==11){
-        
-        UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Select Blood Group" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
-        UIAlertAction * blood1=[UIAlertAction actionWithTitle:@"A" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"A";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"11"]];
-        }];
-        UIAlertAction * blood2=[UIAlertAction actionWithTitle:@"B" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"B";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"11"]];
-        }];
-        UIAlertAction * blood3=[UIAlertAction actionWithTitle:@"AB" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"AB";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"11"]];
-        }];
-        UIAlertAction * blood4=[UIAlertAction actionWithTitle:@"O" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            textField.text=@"O";
-            [_resultDict setValue:textField.text forKey:[NSString stringWithFormat:@"11"]];
-        }];
-        [alert addAction:blood1];
-        [alert addAction:blood2];
-        [alert addAction:blood3];
-        [alert addAction:blood4];
-        [self presentViewController:alert animated:YES completion:nil];
-        [textField resignFirstResponder];
-    }else if (textField.tag==12) {
-        [self startGettingLocation];
-        [textField resignFirstResponder];
-    }
+//
+//    }else if (textField.tag==12) {
+//        [self startGettingLocation];
+
 }
 
+- (void)alertControllerForEducationQulification{
+    NSIndexPath * eduIndPath =[NSIndexPath indexPathForRow:9 inSection:0];
+    textFieldCellDriver * eduCell =[_tableview cellForRowAtIndexPath:eduIndPath];
+    UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Select Education Level" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * edu1=[UIAlertAction actionWithTitle:@"High School" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        eduCell.showTextField.text=@"High School";
+        [_resultDict setValue:eduCell.showTextField.text forKey:[NSString stringWithFormat:@"10"]];
+    }];
+    UIAlertAction * edu2=[UIAlertAction actionWithTitle:@"Bechalor" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        eduCell.showTextField.text=@"Bechalor";
+        [_resultDict setValue:eduCell.showTextField.text forKey:[NSString stringWithFormat:@"10"]];
+    }];
+    UIAlertAction * edu3=[UIAlertAction actionWithTitle:@"Master" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        eduCell.showTextField.text=@"Master";
+        [_resultDict setValue:eduCell.showTextField.text forKey:[NSString stringWithFormat:@"10"]];
+    }];
+    UIAlertAction * edu4=[UIAlertAction actionWithTitle:@"Doctor" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        eduCell.showTextField.text=@"Doctor";
+        [_resultDict setValue:eduCell.showTextField.text forKey:[NSString stringWithFormat:@"10"]];
+    }];
+    [alert addAction:edu1];
+    [alert addAction:edu2];
+    [alert addAction:edu3];
+    [alert addAction:edu4];
+    [self presentViewController:alert animated:YES completion:nil];
+    [self.view endEditing:NO];
+}
+
+- (void)alertControllerForBloodGroupSelection{
+    NSIndexPath * bloodIndPath =[NSIndexPath indexPathForRow:10 inSection:0];
+    textFieldCellDriver * bloodCell =[_tableview cellForRowAtIndexPath:bloodIndPath];
+    UIAlertController * alert= [UIAlertController alertControllerWithTitle:@"Select Blood Group" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * blood1=[UIAlertAction actionWithTitle:@"A" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        bloodCell.showTextField.text=@"A";
+        [_resultDict setValue:bloodCell.showTextField.text forKey:[NSString stringWithFormat:@"11"]];
+    }];
+    UIAlertAction * blood2=[UIAlertAction actionWithTitle:@"B" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        bloodCell.showTextField.text=@"B";
+        [_resultDict setValue:bloodCell.showTextField.text forKey:[NSString stringWithFormat:@"11"]];
+    }];
+    UIAlertAction * blood3=[UIAlertAction actionWithTitle:@"AB" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        bloodCell.showTextField.text=@"AB";
+        [_resultDict setValue:bloodCell.showTextField.text forKey:[NSString stringWithFormat:@"11"]];
+    }];
+    UIAlertAction * blood4=[UIAlertAction actionWithTitle:@"O" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        bloodCell.showTextField.text=@"O";
+        [_resultDict setValue:bloodCell.showTextField.text forKey:[NSString stringWithFormat:@"11"]];
+    }];
+    [alert addAction:blood1];
+    [alert addAction:blood2];
+    [alert addAction:blood3];
+    [alert addAction:blood4];
+    [self presentViewController:alert animated:YES completion:nil];
+    [self.view endEditing:NO];
+}
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -234,8 +269,13 @@ static bool photoIsGood=false;
     _selectedDate= formatedDate;
 }
 
+- (void)showDateView{
+    _dataPickerView.hidden=false;
+}
+
 #pragma mark- get location city by coordinator-
 - (void)startGettingLocation {
+ //   [self.view endEditing:NO];
     _locationManager.delegate=self;
     _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
     [_locationManager requestAlwaysAuthorization];
@@ -260,6 +300,7 @@ static bool photoIsGood=false;
             
             NSIndexPath * cityIndPath =[NSIndexPath indexPathForRow:11 inSection:0];
             textFieldCellDriver * cityCell = [_tableview cellForRowAtIndexPath:cityIndPath];
+            
             cityCell.showTextField.text=[_resultDict valueForKey:[NSString stringWithFormat:@"%d",12]];
         } else   NSLog(@"%@", error.debugDescription);
     }];
@@ -291,21 +332,22 @@ static bool photoIsGood=false;
     NSCharacterSet *licenseSet = [NSCharacterSet characterSetWithCharactersInString:licenseStr];
     if (licenseStr.length==9 && [numberSet isSupersetOfSet:licenseSet]) licenseIsGood=true;
     NSCharacterSet *emergencySet = [NSCharacterSet characterSetWithCharactersInString:emergencyStr];
-    if (licenseStr.length==10 && [numberSet isSupersetOfSet:emergencySet]) emergencyIsGood=true;
+    if (emergencyStr.length==10 && [numberSet isSupersetOfSet:emergencySet]) emergencyIsGood=true;
     NSString * formatedDate=[_dateFormatter stringFromDate:[NSDate date]];
     NSString * todayDate=formatedDate;
     NSString * todayYear=[todayDate componentsSeparatedByString:@"-"][2];
     NSString * todayMonth=[todayDate componentsSeparatedByString:@"-"][0];
     NSString * todayDay=[todayDate componentsSeparatedByString:@"-"][1];
     NSString * birthDate=DOBStr;
-    if (birthDate.length==0) birthDate=todayDate;
+    if (birthDate.length!=0){
     NSString * birthYear=[birthDate componentsSeparatedByString:@"-"][2];
     NSString * birthMonth=[birthDate componentsSeparatedByString:@"-"][0];
     NSString * birthDay=[birthDate componentsSeparatedByString:@"-"][1];
-    if ([todayYear intValue]-18>[birthYear intValue]) DOBIsGood=true;
-    else if ([todayYear intValue]-18==[birthYear intValue] && [todayMonth intValue]>[birthMonth intValue]) DOBIsGood=true;
-    else if ([todayYear intValue]-18==[birthYear intValue] && [todayMonth intValue]==[birthMonth intValue] && [todayDay intValue]>[birthDay intValue]) DOBIsGood=true;
-    else DOBIsGood=false;
+        if ([todayYear intValue]-18>[birthYear intValue]) DOBIsGood=true;
+        else if ([todayYear intValue]-18==[birthYear intValue] && [todayMonth intValue]>[birthMonth intValue]) DOBIsGood=true;
+        else if ([todayYear intValue]-18==[birthYear intValue] && [todayMonth intValue]==[birthMonth intValue] && [todayDay intValue]>[birthDay intValue]) DOBIsGood=true;
+        else DOBIsGood=false;
+    }
     if (eduStr.length!=0) eduIsGood=true;
     if (bloodStr.length!=0) bloodIsGood=true;
     if (cityStr.length!=0) cityIsGood=true;
@@ -327,7 +369,7 @@ static bool photoIsGood=false;
     if (!photoIsGood)  problemStr=[problemStr stringByAppendingString:@" Please upload photo!"];
 
     
-    if (nameIsGood&&emailIsGood&&mobileIsGood&&passwordIsGood&&repeatPasswordIsGood&&VINIsGood&&licenseIsGood&&emergencyIsGood&&DOBIsGood&&eduIsGood&&bloodIsGood&&cityIsGood) {
+    if (nameIsGood&&emailIsGood&&mobileIsGood&&passwordIsGood&&repeatPasswordIsGood&&VINIsGood&&licenseIsGood&&emergencyIsGood&&DOBIsGood&&eduIsGood&&bloodIsGood&&cityIsGood&&photoIsGood) {
         NSString * urlString = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?username=%@&password=%@&mobile=%@",emailStr,passwordStr,mobileStr];
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:urlString preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

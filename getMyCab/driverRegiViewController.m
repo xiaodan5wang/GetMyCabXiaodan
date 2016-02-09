@@ -90,6 +90,7 @@ static bool photoIsGood=false;
         cell.showTextField.tag=indexPath.row+1;
         cell.showTextField.delegate=self;
         cell.showTextField.text=[_resultDict valueForKey:[NSString stringWithFormat:@"%d",cell.showTextField.tag]];
+        cell.buttonToAvoidTextfield.tag=(indexPath.row+1)*10;
     }else if (indexPath.row==_labelArray.count) {
         cell  = [tableView dequeueReusableCellWithIdentifier:@"photoCellDriver"];
         cell.showLabel.text = @"Photo";
@@ -98,37 +99,22 @@ static bool photoIsGood=false;
         cell.showTextField.secureTextEntry=true;
     }
     
-    if (indexPath.row==8) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"" forState:UIControlStateNormal];
-        button.backgroundColor= [UIColor blackColor];
-        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
-        [button addTarget:self action:@selector(showDateView) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:button];
-    }else if (indexPath.row==9) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"" forState:UIControlStateNormal];
-        button.backgroundColor= [UIColor blackColor];
-        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
-        [button addTarget:self action:@selector(alertControllerForEducationQulification) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:button];
-    }else if (indexPath.row==10) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"" forState:UIControlStateNormal];
-        button.backgroundColor= [UIColor blackColor];
-        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
-        [button addTarget:self action:@selector(alertControllerForBloodGroupSelection) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:button];
-    }else if (indexPath.row==11) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"" forState:UIControlStateNormal];
-        button.backgroundColor= [UIColor redColor];
-        button.frame = CGRectMake(cell.frame.origin.x + 165, cell.frame.origin.y, 155, 45);
-        [button addTarget:self action:@selector(startGettingLocation) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:button];
+    if (indexPath.row<8) cell.buttonToAvoidTextfield.enabled=false;
+    else if(indexPath.row>=8 && indexPath.row<=11)cell.buttonToAvoidTextfield.enabled=true;
+    return cell;
+}
+- (IBAction)buttonToAvoidTextFieldTapped:(id)sender {
+    if ([sender tag]==90) {
+        [self showDateView];
+    }else if ([sender tag]==100){
+        [self alertControllerForEducationQulification];
+    }else if ([sender tag]==110){
+        [self alertControllerForBloodGroupSelection];
+    }else if ([sender tag]==120){
+        [self startGettingLocation];
     }
     
-    return cell;
+    
 }
 
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -140,10 +126,6 @@ static bool photoIsGood=false;
 
     UITableViewCell *cellAll = (UITableViewCell *) [[textField superview] superview];
     [_tableview scrollToRowAtIndexPath:[_tableview indexPathForCell:cellAll] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        
-//
-//    }else if (textField.tag==12) {
-//        [self startGettingLocation];
 
 }
 
@@ -225,6 +207,7 @@ static bool photoIsGood=false;
 #pragma mark- imagePickerController-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage *img= info[UIImagePickerControllerOriginalImage];
+//    _imageData = [[NSData alloc]init];
     _imageData = UIImagePNGRepresentation(img);
     NSIndexPath * photoIndPath =[NSIndexPath indexPathForRow:_labelArray.count inSection:0];
     photoCellDriver * photoCell = [_tableview cellForRowAtIndexPath:photoIndPath];
@@ -271,11 +254,12 @@ static bool photoIsGood=false;
 
 - (void)showDateView{
     _dataPickerView.hidden=false;
+    [self.view endEditing:NO];
 }
 
 #pragma mark- get location city by coordinator-
 - (void)startGettingLocation {
- //   [self.view endEditing:NO];
+    [self.view endEditing:NO];
     _locationManager.delegate=self;
     _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
     [_locationManager requestAlwaysAuthorization];
@@ -317,9 +301,6 @@ static bool photoIsGood=false;
     NSString * licenseStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"7"] ];
     NSString * emergencyStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"8"] ];
     NSString * DOBStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"9"] ];
-    NSString * eduStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"10"] ];
-    NSString * bloodStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"11"] ];
-    NSString * cityStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"12"] ];
     
     if (nameStr.length>=8) nameIsGood=true;
     if ([emailStr rangeOfString:@"@"].location!=NSNotFound && [emailStr rangeOfString:@".com"].location!=NSNotFound) emailIsGood=true;
@@ -339,36 +320,35 @@ static bool photoIsGood=false;
     NSString * todayMonth=[todayDate componentsSeparatedByString:@"-"][0];
     NSString * todayDay=[todayDate componentsSeparatedByString:@"-"][1];
     NSString * birthDate=DOBStr;
-    if (birthDate.length!=0){
+    if ([dict valueForKey:@"9"]){//birthDate.length!=0){
     NSString * birthYear=[birthDate componentsSeparatedByString:@"-"][2];
     NSString * birthMonth=[birthDate componentsSeparatedByString:@"-"][0];
     NSString * birthDay=[birthDate componentsSeparatedByString:@"-"][1];
         if ([todayYear intValue]-18>[birthYear intValue]) DOBIsGood=true;
         else if ([todayYear intValue]-18==[birthYear intValue] && [todayMonth intValue]>[birthMonth intValue]) DOBIsGood=true;
         else if ([todayYear intValue]-18==[birthYear intValue] && [todayMonth intValue]==[birthMonth intValue] && [todayDay intValue]>[birthDay intValue]) DOBIsGood=true;
-        else DOBIsGood=false;
     }
-    if (eduStr.length!=0) eduIsGood=true;
-    if (bloodStr.length!=0) bloodIsGood=true;
-    if (cityStr.length!=0) cityIsGood=true;
-    if (_imageData) photoIsGood=true;
+    if ([dict valueForKey:@"9"]!=nil) eduIsGood=true;
+    if ([dict valueForKey:@"10"]!=nil) bloodIsGood=true;
+    if ([dict valueForKey:@"11"]!=nil) cityIsGood=true;
+//    if (!_imageData && true) photoIsGood=true;
+    if (_imageData.length >0) photoIsGood=true;
     
     NSString * problemStr= [[NSString alloc]init];
-    if (!nameIsGood) problemStr=[problemStr stringByAppendingString:@" Name requires 8 digit!"];
-    if (!emailIsGood)  problemStr=[problemStr stringByAppendingString:@" Invalid email!"];
-    if (!mobileIsGood)  problemStr=[problemStr stringByAppendingString:@" Phone number requires 8 digit!"];
-    if (!passwordIsGood)  problemStr=[problemStr stringByAppendingString:@" Password requires 5-10 digit!"];
-    if (!repeatPasswordIsGood)  problemStr=[problemStr stringByAppendingString:@" Two passwords are different!"];
-    if (!VINIsGood)  problemStr=[problemStr stringByAppendingString:@" VIN requires 17 digit"];
-    if (!licenseIsGood) problemStr=[problemStr stringByAppendingString:@" Invalid license number!"];
-    if (!emergencyIsGood)  problemStr=[problemStr stringByAppendingString:@" Emergency contact requires 10 digit!"];
-    if (!DOBIsGood)  problemStr=[problemStr stringByAppendingString:@" You are too young!"];
-    if (!eduIsGood)  problemStr=[problemStr stringByAppendingString:@" Please select EDU level!"];
-    if (!bloodIsGood)  problemStr=[problemStr stringByAppendingString:@" Please select blood group!"];
-    if (!cityIsGood)   problemStr=[problemStr stringByAppendingString:@" Please let system find your city"];
-    if (!photoIsGood)  problemStr=[problemStr stringByAppendingString:@" Please upload photo!"];
+    if (!nameIsGood) problemStr=[problemStr stringByAppendingString:@" Name requires 8 digit!\n"];
+    if (!emailIsGood)  problemStr=[problemStr stringByAppendingString:@" Invalid email!\n"];
+    if (!mobileIsGood)  problemStr=[problemStr stringByAppendingString:@" Phone number requires 8 digit!\n"];
+    if (!passwordIsGood)  problemStr=[problemStr stringByAppendingString:@" Password requires 5-10 digit!\n"];
+    if (!repeatPasswordIsGood)  problemStr=[problemStr stringByAppendingString:@" Two passwords are different!\n"];
+    if (!VINIsGood)  problemStr=[problemStr stringByAppendingString:@" VIN requires 17 digit\n"];
+    if (!licenseIsGood) problemStr=[problemStr stringByAppendingString:@" Invalid license number!\n"];
+    if (!emergencyIsGood)  problemStr=[problemStr stringByAppendingString:@" Emergency contact requires 10 digit!\n"];
+    if (!DOBIsGood)  problemStr=[problemStr stringByAppendingString:@" You are too young!\n"];
+    if (!eduIsGood)  problemStr=[problemStr stringByAppendingString:@" Please select EDU level!\n"];
+    if (!bloodIsGood)  problemStr=[problemStr stringByAppendingString:@" Please select blood group!\n"];
+    if (!cityIsGood)   problemStr=[problemStr stringByAppendingString:@" Please let system find your city!\n"];
+    if (!photoIsGood)  problemStr=[problemStr stringByAppendingString:@" Please upload photo!\n"];
 
-    
     if (nameIsGood&&emailIsGood&&mobileIsGood&&passwordIsGood&&repeatPasswordIsGood&&VINIsGood&&licenseIsGood&&emergencyIsGood&&DOBIsGood&&eduIsGood&&bloodIsGood&&cityIsGood&&photoIsGood) {
         NSString * urlString = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?username=%@&password=%@&mobile=%@",emailStr,passwordStr,mobileStr];
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:urlString preferredStyle:UIAlertControllerStyleAlert];
@@ -376,6 +356,17 @@ static bool photoIsGood=false;
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
+        
+        [[[NSURLSession sharedSession] dataTaskWithRequest:[self getURLRequestForRegistration] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (!error) {
+                NSString* respondStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self loginStatus:respondStr];
+                });
+            }
+        }] resume];
+        
+        
     }else {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Check format!" message:problemStr preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -383,6 +374,19 @@ static bool photoIsGood=false;
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (NSURLRequest *)getURLRequestForRegistration{
+    NSURL * url=[NSURL URLWithString:[NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtestdriver.php?name=%@&email=%@&mobile=%@&password=%@&vechile=%@&license=%@&city=%@",[_resultDict valueForKey:@"1"],[_resultDict valueForKey:@"2"],[_resultDict valueForKey:@"3"],[_resultDict valueForKey:@"4"],[_resultDict valueForKey:@"6"],[_resultDict valueForKey:@"7"],[_resultDict valueForKey:@"12"]]];
+    NSMutableURLRequest * urlRequest=[NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:180];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    return urlRequest;
+}
+
+- (void)loginStatus:(NSString*)string{
+    NSLog(@"response string from server:%@",string);
 }
 
 

@@ -9,11 +9,14 @@
 #import "LoginViewController.h"
 #import "custRegiViewController.h"
 #import "driverRegiViewController.h"
+#import "MapViewController.h"
 
 @interface LoginViewController ()
 - (IBAction)signupButtonTapped:(id)sender;
 - (IBAction)loginButtonTapped:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 
 @end
 
@@ -57,5 +60,39 @@
 }
 
 - (IBAction)loginButtonTapped:(id)sender {
+ 
+    [[[NSURLSession sharedSession] dataTaskWithRequest:[self getURLRequestForRegistration] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
+            NSString* respondStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self loginStatus:respondStr];
+            });
+        }
+    }] resume];
+
 }
+
+- (NSURLRequest *)getURLRequestForRegistration{
+    NSURL * url;
+    if (_tagFlag==1) {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"http://rjtmobile.com/ansari/dbConnect.php?mobile=%@&password=%@",_usernameTextfield.text,_passwordTextfield.text]];
+    }else {
+        url=[NSURL URLWithString:[NSString stringWithFormat:@"http://rjtmobile.com/ansari/driver_login.php?mobile=%@&password=%@",_usernameTextfield.text,_passwordTextfield.text]];
+    }
+    
+    NSMutableURLRequest * urlRequest=[NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:180];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    return urlRequest;
+}
+
+- (void)loginStatus:(NSString*)string{
+    NSLog(@"response string from server:%@",string);
+    if ([string isEqualToString:@"success"]) {
+        MapViewController * mapVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
+        [self.navigationController pushViewController:mapVC animated:YES];
+    }
+}
+
 @end

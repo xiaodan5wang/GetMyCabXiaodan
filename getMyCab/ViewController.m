@@ -31,6 +31,6 @@
     UIButton * button = (UIButton*) sender;
     LoginViewController * loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     [self.navigationController pushViewController:loginVC animated:YES];
-    loginVC.tagFlag=button.tag;
+    loginVC.tagFlag=button.tag; //1 for customer and 2 for driver
 }
 @end

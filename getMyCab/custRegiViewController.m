@@ -89,21 +89,31 @@ static bool repeatPasswordIsGood=false;
     
     if (emailIsGood && mobileIsGood && passwordIsGood && repeatPasswordIsGood) {
 
-        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        NSURL *url = [NSURL URLWithString:@"http://rjtmobile.com/ansari/regtest.php?"];
-        NSMutableURLRequest *urlrequest = [NSMutableURLRequest requestWithURL:url];
-        NSString *urlStr = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?%@&%@&%@",emailStr,passwordStr,mobileStr];
-        [urlrequest setHTTPMethod:@"POST"];
-        [urlrequest setHTTPBody:[urlStr dataUsingEncoding:NSUTF8StringEncoding]];
+//        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+//        NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+//        NSURL *url = [NSURL URLWithString:@"http://rjtmobile.com/ansari/regtest.php?"];
+//        NSMutableURLRequest *urlrequest = [NSMutableURLRequest requestWithURL:url];
+//        NSString *urlStr = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?username=%@&password=%@&mobile=%@",emailStr,passwordStr,mobileStr];
+//        [urlrequest setHTTPMethod:@"POST"];
+//        [urlrequest setHTTPBody:[urlStr dataUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlrequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//            NSLog(@"response state code%ld",(long)[httpResponse statusCode]);
+//
+//        }];
+//        [dataTask resume];
+//        
+        [[[NSURLSession sharedSession] dataTaskWithRequest:[self getURLRequestForRegistration] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (!error) {
+                NSString* respondStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self loginStatus:respondStr];
+                });
+            }
+        }] resume];
         
-        NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlrequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            NSLog(@"response state code%ld",(long)[httpResponse statusCode]);
-
-        }];
-        [dataTask resume];
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:urlStr preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:@"suc" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
@@ -120,6 +130,21 @@ static bool repeatPasswordIsGood=false;
     
 }
 
+
+- (NSURLRequest *)getURLRequestForRegistration{
+    NSURL * url=[NSURL URLWithString:[NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?username=%@&mobile=%@&password=%@",_resultArray[0],_resultArray[1],_resultArray[2]]];
+    NSMutableURLRequest * urlRequest=[NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:180];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    return urlRequest;
+}
+
+- (void)loginStatus:(NSString*)string{
+    NSLog(@"response string from server:%@",string);
+}
+
+
 - (IBAction)submitButtonTapped:(id)sender {
     
     emailIsGood=false;
@@ -133,6 +158,8 @@ static bool repeatPasswordIsGood=false;
         _resultArray[i]=localCell.showTextfield.text;
     }
     [self formatCheck:_resultArray];
+    
 }
+
 
 @end

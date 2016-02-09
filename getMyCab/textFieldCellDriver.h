@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *showLabel;
 @property (weak, nonatomic) IBOutlet UITextField *showTextField;
+@property (weak, nonatomic) IBOutlet UIButton *buttonToAvoidTextfield;
 
 @end

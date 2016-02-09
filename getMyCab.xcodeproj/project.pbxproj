@@ -26,6 +26,8 @@
 		6B21419E1C61B1CA00554BAB /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2141991C61B1CA00554BAB /* login.png */; };
 		6B21419F1C61B1CA00554BAB /* signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B21419A1C61B1CA00554BAB /* signup.png */; };
 		6B2141A01C61B1CA00554BAB /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B21419B1C61B1CA00554BAB /* submit.png */; };
+		6B732C3A1C695E63005CEA4B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B732C391C695E63005CEA4B /* MapViewController.m */; };
+		6B732C3C1C69617A005CEA4B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B732C3B1C69617A005CEA4B /* MapKit.framework */; };
 		6B9976A11C640B8B00FE1AF5 /* 750X1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9976A01C640B8B00FE1AF5 /* 750X1334.png */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,9 @@
 		6B2141991C61B1CA00554BAB /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = NormalState/login.png; sourceTree = SOURCE_ROOT; };
 		6B21419A1C61B1CA00554BAB /* signup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup.png; path = NormalState/signup.png; sourceTree = SOURCE_ROOT; };
 		6B21419B1C61B1CA00554BAB /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = submit.png; path = NormalState/submit.png; sourceTree = SOURCE_ROOT; };
+		6B732C381C695E63005CEA4B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		6B732C391C695E63005CEA4B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		6B732C3B1C69617A005CEA4B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6B9976A01C640B8B00FE1AF5 /* 750X1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750X1334.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -67,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B732C3C1C69617A005CEA4B /* MapKit.framework in Frameworks */,
 				6B2141941C618A5900554BAB /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,6 +83,7 @@
 		6B2141331C6010A400554BAB = {
 			isa = PBXGroup;
 			children = (
+				6B732C3B1C69617A005CEA4B /* MapKit.framework */,
 				6B2141931C618A5900554BAB /* CoreLocation.framework */,
 				6B21413E1C6010A400554BAB /* getMyCab */,
 				6B21413D1C6010A400554BAB /* Products */,
@@ -100,6 +107,8 @@
 				6B2141461C6010A400554BAB /* ViewController.m */,
 				6B21415C1C601AE400554BAB /* LoginViewController.h */,
 				6B21415D1C601AE400554BAB /* LoginViewController.m */,
+				6B732C381C695E63005CEA4B /* MapViewController.h */,
+				6B732C391C695E63005CEA4B /* MapViewController.m */,
 				6B21415A1C6017F700554BAB /* my_logo.png */,
 				6B2141481C6010A400554BAB /* Main.storyboard */,
 				6B2141621C601E9500554BAB /* custRegiViewController.h */,
@@ -219,6 +228,7 @@
 				6B2141641C601E9500554BAB /* custRegiViewController.m in Sources */,
 				6B21416A1C606DDE00554BAB /* textFieldCellDriver.m in Sources */,
 				6B2141411C6010A400554BAB /* main.m in Sources */,
+				6B732C3A1C695E63005CEA4B /* MapViewController.m in Sources */,
 				6B21416D1C6070FB00554BAB /* photoCellDriver.m in Sources */,
 				6B2141671C60250F00554BAB /* textFieldCell.m in Sources */,
 			);

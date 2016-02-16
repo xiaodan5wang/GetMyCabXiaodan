@@ -26,6 +26,18 @@
 		6B21419E1C61B1CA00554BAB /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B2141991C61B1CA00554BAB /* login.png */; };
 		6B21419F1C61B1CA00554BAB /* signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B21419A1C61B1CA00554BAB /* signup.png */; };
 		6B2141A01C61B1CA00554BAB /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B21419B1C61B1CA00554BAB /* submit.png */; };
+		6B32320B1C6A5E030052DF83 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B32320A1C6A5E030052DF83 /* background.png */; };
+		6B32320E1C6A67310052DF83 /* MapViewControllerDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32320D1C6A67310052DF83 /* MapViewControllerDriver.m */; };
+		6B3232101C6A8AD40052DF83 /* offduty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B32320F1C6A8AD40052DF83 /* offduty.png */; };
+		6B3232121C6A8B0E0052DF83 /* onduty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3232111C6A8B0E0052DF83 /* onduty.png */; };
+		6B3232141C6A8B800052DF83 /* bookings.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3232131C6A8B800052DF83 /* bookings.png */; };
+		6B32321D1C6A92200052DF83 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B32321C1C6A92200052DF83 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6B32321F1C6AA2660052DF83 /* book taxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B32321E1C6AA2660052DF83 /* book taxi.png */; };
+		6B3232221C6AA44B0052DF83 /* MapViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B3232211C6AA44B0052DF83 /* MapViewController2.m */; };
+		6B3232251C6ADC5A0052DF83 /* pin-drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3232231C6ADC5A0052DF83 /* pin-drop.png */; };
+		6B3232261C6ADC5A0052DF83 /* pin-pick.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B3232241C6ADC5A0052DF83 /* pin-pick.png */; };
+		6B4BB8201C715BEF00E1CB39 /* car_driver.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B4BB81F1C715BEF00E1CB39 /* car_driver.png */; };
+		6B4BB8221C715FD100E1CB39 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4BB8211C715FD100E1CB39 /* MessageUI.framework */; };
 		6B732C3A1C695E63005CEA4B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B732C391C695E63005CEA4B /* MapViewController.m */; };
 		6B732C3C1C69617A005CEA4B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B732C3B1C69617A005CEA4B /* MapKit.framework */; };
 		6B9976A11C640B8B00FE1AF5 /* 750X1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B9976A01C640B8B00FE1AF5 /* 750X1334.png */; };
@@ -61,6 +73,21 @@
 		6B2141991C61B1CA00554BAB /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = NormalState/login.png; sourceTree = SOURCE_ROOT; };
 		6B21419A1C61B1CA00554BAB /* signup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup.png; path = NormalState/signup.png; sourceTree = SOURCE_ROOT; };
 		6B21419B1C61B1CA00554BAB /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = submit.png; path = NormalState/submit.png; sourceTree = SOURCE_ROOT; };
+		6B32320A1C6A5E030052DF83 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = SOURCE_ROOT; };
+		6B32320C1C6A67300052DF83 /* MapViewControllerDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewControllerDriver.h; sourceTree = "<group>"; };
+		6B32320D1C6A67310052DF83 /* MapViewControllerDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewControllerDriver.m; sourceTree = "<group>"; };
+		6B32320F1C6A8AD40052DF83 /* offduty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offduty.png; sourceTree = SOURCE_ROOT; };
+		6B3232111C6A8B0E0052DF83 /* onduty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onduty.png; sourceTree = SOURCE_ROOT; };
+		6B3232131C6A8B800052DF83 /* bookings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookings.png; sourceTree = SOURCE_ROOT; };
+		6B32321B1C6A92200052DF83 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
+		6B32321C1C6A92200052DF83 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
+		6B32321E1C6AA2660052DF83 /* book taxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book taxi.png"; sourceTree = SOURCE_ROOT; };
+		6B3232201C6AA44B0052DF83 /* MapViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController2.h; sourceTree = "<group>"; };
+		6B3232211C6AA44B0052DF83 /* MapViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController2.m; sourceTree = "<group>"; };
+		6B3232231C6ADC5A0052DF83 /* pin-drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin-drop.png"; sourceTree = SOURCE_ROOT; };
+		6B3232241C6ADC5A0052DF83 /* pin-pick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin-pick.png"; sourceTree = SOURCE_ROOT; };
+		6B4BB81F1C715BEF00E1CB39 /* car_driver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = car_driver.png; path = ../car_driver.png; sourceTree = "<group>"; };
+		6B4BB8211C715FD100E1CB39 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6B732C381C695E63005CEA4B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		6B732C391C695E63005CEA4B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		6B732C3B1C69617A005CEA4B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -72,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4BB8221C715FD100E1CB39 /* MessageUI.framework in Frameworks */,
 				6B732C3C1C69617A005CEA4B /* MapKit.framework in Frameworks */,
 				6B2141941C618A5900554BAB /* CoreLocation.framework in Frameworks */,
 			);
@@ -83,6 +111,7 @@
 		6B2141331C6010A400554BAB = {
 			isa = PBXGroup;
 			children = (
+				6B4BB8211C715FD100E1CB39 /* MessageUI.framework */,
 				6B732C3B1C69617A005CEA4B /* MapKit.framework */,
 				6B2141931C618A5900554BAB /* CoreLocation.framework */,
 				6B21413E1C6010A400554BAB /* getMyCab */,
@@ -101,26 +130,13 @@
 		6B21413E1C6010A400554BAB /* getMyCab */ = {
 			isa = PBXGroup;
 			children = (
-				6B2141421C6010A400554BAB /* AppDelegate.h */,
-				6B2141431C6010A400554BAB /* AppDelegate.m */,
-				6B2141451C6010A400554BAB /* ViewController.h */,
-				6B2141461C6010A400554BAB /* ViewController.m */,
-				6B21415C1C601AE400554BAB /* LoginViewController.h */,
-				6B21415D1C601AE400554BAB /* LoginViewController.m */,
-				6B732C381C695E63005CEA4B /* MapViewController.h */,
-				6B732C391C695E63005CEA4B /* MapViewController.m */,
-				6B21415A1C6017F700554BAB /* my_logo.png */,
+				6B32321A1C6A91DF0052DF83 /* progressHUD */,
+				6B3232191C6A91980052DF83 /* cells */,
+				6B3232181C6A916F0052DF83 /* mapview */,
+				6B3232171C6A91570052DF83 /* register */,
+				6B3232161C6A911F0052DF83 /* login */,
+				6B3232151C6A90E90052DF83 /* basic */,
 				6B2141481C6010A400554BAB /* Main.storyboard */,
-				6B2141621C601E9500554BAB /* custRegiViewController.h */,
-				6B2141631C601E9500554BAB /* custRegiViewController.m */,
-				6B21415F1C601E8200554BAB /* driverRegiViewController.h */,
-				6B2141601C601E8200554BAB /* driverRegiViewController.m */,
-				6B2141651C60250F00554BAB /* textFieldCell.h */,
-				6B2141661C60250F00554BAB /* textFieldCell.m */,
-				6B2141681C606DDE00554BAB /* textFieldCellDriver.h */,
-				6B2141691C606DDE00554BAB /* textFieldCellDriver.m */,
-				6B21416B1C6070FB00554BAB /* photoCellDriver.h */,
-				6B21416C1C6070FB00554BAB /* photoCellDriver.m */,
 				6B21414B1C6010A400554BAB /* Assets.xcassets */,
 				6B21414D1C6010A400554BAB /* LaunchScreen.storyboard */,
 				6B2141501C6010A400554BAB /* Info.plist */,
@@ -132,6 +148,15 @@
 		6B21413F1C6010A400554BAB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6B4BB81F1C715BEF00E1CB39 /* car_driver.png */,
+				6B3232231C6ADC5A0052DF83 /* pin-drop.png */,
+				6B3232241C6ADC5A0052DF83 /* pin-pick.png */,
+				6B32321E1C6AA2660052DF83 /* book taxi.png */,
+				6B21415A1C6017F700554BAB /* my_logo.png */,
+				6B3232131C6A8B800052DF83 /* bookings.png */,
+				6B3232111C6A8B0E0052DF83 /* onduty.png */,
+				6B32320F1C6A8AD40052DF83 /* offduty.png */,
+				6B32320A1C6A5E030052DF83 /* background.png */,
 				6B9976A01C640B8B00FE1AF5 /* 750X1334.png */,
 				6B2141971C61B1CA00554BAB /* clogin.png */,
 				6B2141981C61B1CA00554BAB /* dlogin.png */,
@@ -141,6 +166,72 @@
 				6B2141401C6010A400554BAB /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6B3232151C6A90E90052DF83 /* basic */ = {
+			isa = PBXGroup;
+			children = (
+				6B2141421C6010A400554BAB /* AppDelegate.h */,
+				6B2141431C6010A400554BAB /* AppDelegate.m */,
+				6B2141451C6010A400554BAB /* ViewController.h */,
+				6B2141461C6010A400554BAB /* ViewController.m */,
+			);
+			name = basic;
+			sourceTree = "<group>";
+		};
+		6B3232161C6A911F0052DF83 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				6B21415C1C601AE400554BAB /* LoginViewController.h */,
+				6B21415D1C601AE400554BAB /* LoginViewController.m */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		6B3232171C6A91570052DF83 /* register */ = {
+			isa = PBXGroup;
+			children = (
+				6B2141621C601E9500554BAB /* custRegiViewController.h */,
+				6B2141631C601E9500554BAB /* custRegiViewController.m */,
+				6B21415F1C601E8200554BAB /* driverRegiViewController.h */,
+				6B2141601C601E8200554BAB /* driverRegiViewController.m */,
+			);
+			name = register;
+			sourceTree = "<group>";
+		};
+		6B3232181C6A916F0052DF83 /* mapview */ = {
+			isa = PBXGroup;
+			children = (
+				6B732C381C695E63005CEA4B /* MapViewController.h */,
+				6B732C391C695E63005CEA4B /* MapViewController.m */,
+				6B3232201C6AA44B0052DF83 /* MapViewController2.h */,
+				6B3232211C6AA44B0052DF83 /* MapViewController2.m */,
+				6B32320C1C6A67300052DF83 /* MapViewControllerDriver.h */,
+				6B32320D1C6A67310052DF83 /* MapViewControllerDriver.m */,
+			);
+			name = mapview;
+			sourceTree = "<group>";
+		};
+		6B3232191C6A91980052DF83 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				6B2141651C60250F00554BAB /* textFieldCell.h */,
+				6B2141661C60250F00554BAB /* textFieldCell.m */,
+				6B2141681C606DDE00554BAB /* textFieldCellDriver.h */,
+				6B2141691C606DDE00554BAB /* textFieldCellDriver.m */,
+				6B21416B1C6070FB00554BAB /* photoCellDriver.h */,
+				6B21416C1C6070FB00554BAB /* photoCellDriver.m */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
+		6B32321A1C6A91DF0052DF83 /* progressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6B32321B1C6A92200052DF83 /* MBProgressHUD.h */,
+				6B32321C1C6A92200052DF83 /* MBProgressHUD.m */,
+			);
+			name = progressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,15 +293,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B21419D1C61B1CA00554BAB /* dlogin.png in Resources */,
+				6B32321F1C6AA2660052DF83 /* book taxi.png in Resources */,
+				6B3232261C6ADC5A0052DF83 /* pin-pick.png in Resources */,
 				6B21415B1C6017F700554BAB /* my_logo.png in Resources */,
 				6B9976A11C640B8B00FE1AF5 /* 750X1334.png in Resources */,
+				6B3232121C6A8B0E0052DF83 /* onduty.png in Resources */,
+				6B3232101C6A8AD40052DF83 /* offduty.png in Resources */,
 				6B21414F1C6010A400554BAB /* LaunchScreen.storyboard in Resources */,
 				6B21419F1C61B1CA00554BAB /* signup.png in Resources */,
+				6B3232251C6ADC5A0052DF83 /* pin-drop.png in Resources */,
 				6B21414C1C6010A400554BAB /* Assets.xcassets in Resources */,
 				6B21419C1C61B1CA00554BAB /* clogin.png in Resources */,
 				6B2141A01C61B1CA00554BAB /* submit.png in Resources */,
 				6B21414A1C6010A400554BAB /* Main.storyboard in Resources */,
+				6B32320B1C6A5E030052DF83 /* background.png in Resources */,
 				6B21419E1C61B1CA00554BAB /* login.png in Resources */,
+				6B4BB8201C715BEF00E1CB39 /* car_driver.png in Resources */,
+				6B3232141C6A8B800052DF83 /* bookings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +327,9 @@
 				6B2141641C601E9500554BAB /* custRegiViewController.m in Sources */,
 				6B21416A1C606DDE00554BAB /* textFieldCellDriver.m in Sources */,
 				6B2141411C6010A400554BAB /* main.m in Sources */,
+				6B32321D1C6A92200052DF83 /* MBProgressHUD.m in Sources */,
+				6B3232221C6AA44B0052DF83 /* MapViewController2.m in Sources */,
+				6B32320E1C6A67310052DF83 /* MapViewControllerDriver.m in Sources */,
 				6B732C3A1C695E63005CEA4B /* MapViewController.m in Sources */,
 				6B21416D1C6070FB00554BAB /* photoCellDriver.m in Sources */,
 				6B2141671C60250F00554BAB /* textFieldCell.m in Sources */,

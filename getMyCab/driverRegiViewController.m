@@ -97,6 +97,8 @@ static bool photoIsGood=false;
     }
     if (indexPath.row==3 || indexPath.row==4) {
         cell.showTextField.secureTextEntry=true;
+    }else if (indexPath.row!=12){
+        cell.showTextField.secureTextEntry=false;
     }
     
     if (indexPath.row<8) cell.buttonToAvoidTextfield.enabled=false;
@@ -117,7 +119,7 @@ static bool photoIsGood=false;
     
 }
 
-- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _labelArray.count+1;
 }
 
@@ -350,9 +352,9 @@ static bool photoIsGood=false;
     if (!photoIsGood)  problemStr=[problemStr stringByAppendingString:@" Please upload photo!\n"];
 
     if (nameIsGood&&emailIsGood&&mobileIsGood&&passwordIsGood&&repeatPasswordIsGood&&VINIsGood&&licenseIsGood&&emergencyIsGood&&DOBIsGood&&eduIsGood&&bloodIsGood&&cityIsGood&&photoIsGood) {
-        NSString * urlString = [NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtest.php?username=%@&password=%@&mobile=%@",emailStr,passwordStr,mobileStr];
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:urlString preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Success!" message:@"Register successful. Will return to the login page" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
@@ -365,6 +367,7 @@ static bool photoIsGood=false;
                 });
             }
         }] resume];
+
         
         
     }else {
@@ -377,7 +380,10 @@ static bool photoIsGood=false;
 }
 
 - (NSURLRequest *)getURLRequestForRegistration{
-    NSURL * url=[NSURL URLWithString:[NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtestdriver.php?name=%@&email=%@&mobile=%@&password=%@&vechile=%@&license=%@&city=%@",[_resultDict valueForKey:@"1"],[_resultDict valueForKey:@"2"],[_resultDict valueForKey:@"3"],[_resultDict valueForKey:@"4"],[_resultDict valueForKey:@"6"],[_resultDict valueForKey:@"7"],[_resultDict valueForKey:@"12"]]];
+    NSString *urlText=[NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtestdriver.php?name=%@&email=%@&mobile=%@&password=%@&vechile=%@&license=%@&city=%@",[_resultDict valueForKey:@"1"],[_resultDict valueForKey:@"2"],[_resultDict valueForKey:@"3"],[_resultDict valueForKey:@"4"],[_resultDict valueForKey:@"6"],[_resultDict valueForKey:@"7"],[_resultDict valueForKey:@"12"]];
+    urlText=[urlText stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSURL *url=[NSURL URLWithString:urlText];
+//    NSURL * url=[NSURL URLWithString:[NSString stringWithFormat:@"http://rjtmobile.com/ansari/regtestdriver.php?name=%@&email=%@&mobile=%@&password=%@&vechile=%@&license=%@&city=%@",[_resultDict valueForKey:@"1"],[_resultDict valueForKey:@"2"],[_resultDict valueForKey:@"3"],[_resultDict valueForKey:@"4"],[_resultDict valueForKey:@"6"],[_resultDict valueForKey:@"7"],[_resultDict valueForKey:@"12"]]];
     NSMutableURLRequest * urlRequest=[NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:180];
     [urlRequest setHTTPMethod:@"POST"];

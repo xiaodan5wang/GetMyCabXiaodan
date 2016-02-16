@@ -28,12 +28,6 @@ static bool repeatPasswordIsGood=false;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
-                                initWithTitle:@"Back"
-                                style:UIBarButtonItemStylePlain
-                                target:self
-                                action:nil];
-    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;
     
     self.title=@"Register for customer";
     _labelArray=@[@"Email",@"Mobile Number",@"Password",@"Repeat password"];
@@ -41,7 +35,17 @@ static bool repeatPasswordIsGood=false;
     _resultArray=[[NSMutableArray alloc]init];
     
     _tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
+                                initWithTitle:@"Back"
+                                style:UIBarButtonItemStylePlain
+                                target:self
+                                action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;
+    
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic) int flagForCustomerMapView;
+@property (nonatomic) NSString *cityForCustomerMapView;
 
 @end
 

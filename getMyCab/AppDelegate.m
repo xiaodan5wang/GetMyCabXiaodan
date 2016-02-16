@@ -18,6 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sleep(0.5);
     // Override point for customization after application launch.
+    _flagForCustomerMapView=0;
+    _cityForCustomerMapView=[[NSString alloc]init];
     return YES;
 }
 

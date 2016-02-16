@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MessageUI/MessageUI.h>
 
-@interface MapViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>
+@interface MapViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,MFMessageComposeViewControllerDelegate>
+
+@property (nonatomic,strong) NSString * mobile;
 
 @end
